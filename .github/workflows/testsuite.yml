@@ -90,7 +90,7 @@ jobs:
       - name: Get the qemu container
         run: docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
       - name: "${{ matrix.platform }}: Build and test"
-        run: docker run --rm --interactive --mount type=bind,source=$(pwd),target=/host ${{ matrix.platform }}/ubuntu sh -c "apt update && apt install -y automake libtool && cd /host && libtoolize -vci && autoreconf -vfi && ./configure && make test"
+        run: docker run --rm --interactive --mount type=bind,source=$(pwd),target=/host ${{ matrix.platform }}/ubuntu sh -c "apt update && apt install -y automake libtool libssl-dev && cd /host && libtoolize -vci && autoreconf -vfi && ./configure && make test"
 
   BSDs:
     name: ${{ matrix.os.dispname }} ${{ matrix.os.version }}
